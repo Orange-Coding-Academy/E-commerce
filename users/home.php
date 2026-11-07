@@ -22,8 +22,6 @@ $categories = $category->getAllCategories();
 
 <main class="home-page">
 
-    <!-- Hero Section -->
-
     <section class="hero-section" id="hero">
         <div class="hero-glow hero-glow-1"></div>
         <div class="hero-glow hero-glow-2"></div>
@@ -90,8 +88,6 @@ $categories = $category->getAllCategories();
     </section>
 
 
-    <!-- Marquee -->
-
     <div class="marquee" id="marquee" aria-hidden="true">
         <div class="marquee-track">
             <?php for ($i = 0; $i < 2; $i++): ?>
@@ -105,7 +101,6 @@ $categories = $category->getAllCategories();
     </div>
 
 
-    <!-- Categories -->
 
     <section class="home-section" id="categories">
 
@@ -170,8 +165,6 @@ $categories = $category->getAllCategories();
     </section>
 
 
-    <!-- Features / Stats -->
-
     <section class="features-strip">
         <div class="features-inner">
             <div class="feature reveal" style="--i:0">
@@ -193,8 +186,6 @@ $categories = $category->getAllCategories();
         </div>
     </section>
 
-
-    <!-- Latest Products -->
 
     <section class="home-section">
 
@@ -292,8 +283,6 @@ $categories = $category->getAllCategories();
         </div>
 
     </section>
-
-    <!-- Brand Message -->
 
     <section class="brand-message">
         <div class="brand-glow" aria-hidden="true"></div>

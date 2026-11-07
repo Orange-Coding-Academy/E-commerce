@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $action = $_POST['action'] ?? '';
 
-    // ADD CATEGORY
     if ($action === 'add') {
 
         $name = trim($_POST['name']);
@@ -49,8 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-
-    // EDIT CATEGORY
     if ($action === 'edit') {
 
         $id = $_POST['id'];
@@ -67,10 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name = trim($_POST['name']);
         $description = trim($_POST['description']);
 
-        // Keep old image by default
         $image = $oldCategory['image'];
 
-        // Upload new image only if user selected one
         if (isset($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
 
             $newImage = $uploader->upload($_FILES['image'], "categories");
@@ -97,8 +92,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-
-    // DELETE CATEGORY
     if ($action === 'delete') {
 
         $id = $_POST['id'];
