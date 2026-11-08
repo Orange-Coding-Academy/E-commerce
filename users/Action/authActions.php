@@ -12,18 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $action = $_POST['action'] ?? '';
-
 $database = new Database();
 $db = $database->connect();
-
 $auth = new Auth($db);
-
 $message = "";
 $type = "error";
 $redirect = "../login.php";
-
 switch ($action) {
-
     case "register":
 
         $name = trim($_POST['name'] ?? '');
@@ -31,9 +26,7 @@ switch ($action) {
         $password = $_POST['password'] ?? '';
         $phone = trim($_POST['phone'] ?? '');
         $address = trim($_POST['address'] ?? '');
-
         $redirect = "../register.php";
-
         if (
             $name === '' ||
             $email === '' ||
@@ -50,7 +43,6 @@ switch ($action) {
             $message = "Password must be at least 6 characters";
 
         } else {
-
             $result = $auth->Register(
                 $name,
                 $email,
@@ -58,7 +50,6 @@ switch ($action) {
                 $phone,
                 $address
             );
-
             if ($result) {
                 $message = "Account created successfully. Please login.";
                 $type = "success";
@@ -67,12 +58,9 @@ switch ($action) {
                 $message = "Email already exists or registration failed";
             }
         }
-
         break;
 
-
    case "login":
-
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
@@ -104,30 +92,16 @@ switch ($action) {
                 exit;
 
             }
-
         } else {
 
             $message = $result['message'] ?? "Invalid email or password.";
-
         }
     }
-
     break;
 
     case "logout":
 
         $auth->Logout();
-
-        session_start();
-
-        $_SESSION['toast'] = [
-            'message' => 'You have been logged out successfully',
-            'type' => 'success'
-        ];
-
-        header("Location: ../home.php");
-        exit;
-
 
     default:
 

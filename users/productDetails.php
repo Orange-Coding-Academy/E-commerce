@@ -4,69 +4,42 @@ session_start();
 
 require_once __DIR__ . "/../config/Database.php";
 require_once __DIR__ . "/../classes/Product.php";
-
 $database = new Database();
 $db = $database->connect();
-
 $product = new Product($db);
-
 $id = $_GET['id'] ?? null;
-
 if (!$id || !filter_var($id, FILTER_VALIDATE_INT)) {
     header("Location: products.php");
-    exit;
-}
-
+    exit;}
 $item = $product->getProductByID($id);
-
 if (!$item) {
     header("Location: products.php");
-    exit;
-}
-
+    exit;}
 ?>
-
 <?php require_once __DIR__ . "/includes/header.php"; ?>
 <?php require_once __DIR__ . "/includes/navbar.php"; ?>
-
-
 <section class="product-details-container">
 <h1>Product Details</h1>
     <div class="product-details-card">
-
         <div class="product-details-image">
             <?php if (!empty($item['image'])): ?>
-                <img
-                    src="../<?= htmlspecialchars($item['image']) ?>"
-                    alt="<?= htmlspecialchars($item['name']) ?>"
-                >
+                <img src="../<?= htmlspecialchars($item['image']) ?>"alt="<?= htmlspecialchars($item['name']) ?>">
             <?php endif; ?>
         </div>
-
         <div class="product-details-info">
-
             <h1><?= htmlspecialchars($item['name']) ?></h1>
-
             <div class="details-divider"></div>
-
             <p class="details-description">
-                <?= htmlspecialchars($item['description']) ?>
-            </p>
-
+                <?= htmlspecialchars($item['description']) ?></p>
             <p class="details-price">
-                <?= number_format($item['price'], 2) ?>
-            </p>
-
+                <?= $item['price'] ?></p>
             <div class="details-stock">
                 <?php if ($item['stock'] > 0): ?>
-                    <span class="stock-quantity">
-                        Available Stock: <?= $item['stock'] ?>
-                    </span>
+                    <span class="stock-quantity"> Available Stock: <?= $item['stock'] ?> </span>
                 <?php else: ?>
                     <span class="stock-quantity">Out of Stock</span>
                 <?php endif; ?>
             </div>
-
             <?php if ($item['stock'] > 0): ?>
 
                 <?php if (isset($_SESSION['user_id'])): ?>

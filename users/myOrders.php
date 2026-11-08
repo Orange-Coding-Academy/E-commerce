@@ -1,15 +1,11 @@
 <?php
-
 session_start();
-
 require_once __DIR__ . "/../config/Database.php";
 require_once __DIR__ . "/../classes/Order.php";
-
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
-
 $database = new Database();
 $db = $database->connect();
 
@@ -18,7 +14,6 @@ $order = new Order($db);
 $user_id = $_SESSION['user_id'];
 
 $orders = $order->getUsersOrders($user_id);
-
 ?>
 
 <?php require_once __DIR__ . "/includes/header.php"; ?>
@@ -31,11 +26,8 @@ $orders = $order->getUsersOrders($user_id);
         <h1>My Orders</h1>
         <p>Track and manage your watch orders.</p>
     </div>
-
     <?php if (!empty($orders)): ?>
-
         <div class="orders-table-wrapper">
-
             <table class="orders-table">
 
                 <thead>
@@ -55,19 +47,15 @@ $orders = $order->getUsersOrders($user_id);
                     <?php foreach ($orders as $item): ?>
 
                         <tr>
-
                             <td>
                                 #<?= $item['id'] ?>
                             </td>
-
                             <td class="order-price">
-                                <?= number_format($item['total'], 2) ?>
+                                <?= $item['total'] ?>
                             </td>
-
                             <td>
                                 <?= htmlspecialchars($item['payment_method']) ?>
                             </td>
-
                             <td>
                                 <span class="order-status <?= strtolower($item['payment_status']) ?>">
                                     <?= htmlspecialchars($item['payment_status']) ?>
